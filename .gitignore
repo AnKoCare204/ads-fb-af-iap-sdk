@@ -77,7 +77,6 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
-*~
 
 # Package Manager
 Packages/packages-lock.json
