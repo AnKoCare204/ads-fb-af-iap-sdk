@@ -1,0 +1,34 @@
+{
+  "name": "com.antq.ads-fb-af-iap-sdk",
+  "version": "1.0.0",
+  "displayName": "ADS FB AF IAP SDK",
+  "description": "Unity SDK tích hợp quảng cáo (AdMob, MAX, IronSource), Firebase Analytics, AppsFlyer và In-App Purchase",
+  "unity": "6000.0",
+  "unityRelease": "",
+  "keywords": [
+    "ads",
+    "advertisement",
+    "firebase",
+    "appsflyer",
+    "iap",
+    "in-app-purchase",
+    "mediation",
+    "admob",
+    "max",
+    "ironsource"
+  ],
+  "author": {
+    "name": "An Trinh",
+    "email": "antq@abigames.com.vn",
+    "url": ""
+  },
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Base Setup",
+      "description": "Các prefabs và scripts mẫu để setup SDK",
+      "path": "Samples~/BaseSetup"
+    }
+  ]
+}
+
