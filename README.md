@@ -31,3 +31,5 @@ GoogleMobileAds
 appsflyer-unity-plugin
 
 AppLovin-MAX-Unity-Plugin
+
+Add UNITY_AD_ADMOB, UNITY_APPSFLYER, UNITY_AD_MAX, CHEAT_ONLY into Scripting Define Symbols
