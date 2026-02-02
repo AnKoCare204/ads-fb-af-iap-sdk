@@ -19,10 +19,6 @@ public class AdsController : Singleton<AdsController>
     public static Action EventHideBanner { get; set; }
     public static bool IsRemoveAds {get; private set;}
     
-    [field: SerializeField] public ReactiveValue<float> RemoveAds {get; private set;}
-    [field: SerializeField] public int BannerStartShowLevel {get; private set;}
-    [field: SerializeField] public int InterStartShowLevel {get; private set;}
-    [field: SerializeField] public int InterStartShowDayRetention { get; private set; } = 1;
     [field: SerializeField] public float InterCapping {get; private set;}
     [field: SerializeField] public float InterCappingAfterReward {get; private set;}
     [field: SerializeField] public float InterCooldown {get; private set;}
