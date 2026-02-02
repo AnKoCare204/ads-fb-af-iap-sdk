@@ -1,6 +1,6 @@
 {
   "name": "com.antq.ads-fb-af-iap-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "ADS FB AF IAP SDK",
   "description": "Unity SDK tích hợp quảng cáo (AdMob, MAX, IronSource), Firebase Analytics, AppsFlyer và In-App Purchase",
   "unity": "6000.0",

@@ -2,9 +2,7 @@
     "name": "ADS.FB.AF.IAP.SDK",
     "rootNamespace": "",
     "references": [
-        "GUID:cbb42e4cfd9484f52972c8f05e1c3252",
         "GUID:af860f39950cf4bcb871b7edd8c723d6",
-        "GUID:a10a05a8449c42519fd80f2b8b580de3",
         "GUID:a4cfc1a18fa3a469b96d885db522f42e",
         "GUID:60bfecf5cb232594891bc622f40d6bed",
         "GUID:059c931883a8a274690376c0592ea9a0",
@@ -17,7 +15,8 @@
         "GUID:3b4d8e09c665bfa47849130d8695171e",
         "GUID:ad968d605628d06499b62cdc30f11cf8",
         "GUID:70ea675efa2644cef98c7ece24158333",
-        "GUID:fe25561d224ed4743af4c60938a59d0b"
+        "GUID:fe25561d224ed4743af4c60938a59d0b",
+        "GUID:77221876cc6b8244180b96e320b1bcd4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -26,6 +25,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.cysharp.r3",
+            "expression": "",
+            "define": "R3_TRIGGER"
+        }
+    ],
     "noEngineReferences": false
 }

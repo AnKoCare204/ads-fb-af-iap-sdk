@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Firebase.RemoteConfig;
+// using Manager;
 using R3;
 using SDK;
 using Sirenix.OdinInspector;
@@ -120,12 +121,12 @@ public class AdsController : Singleton<AdsController>
 
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
-            SDKDebugLogger.Log("FailToShowRewardAds: No internet connection");
+            Debug.Log("Fail to show reward ads because of no internet connection");
             // ActivityBlockContext.Events.CallNotification?.Invoke(528);
         }
         else
         {
-            SDKDebugLogger.Log("FailToShowRewardAds: Internet connection");
+            Debug.Log("Fail to show reward ads because of other reason");
             // ActivityBlockContext.Events.CallNotification?.Invoke(535);
         }
     }
