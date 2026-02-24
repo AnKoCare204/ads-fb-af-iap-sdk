@@ -79,7 +79,7 @@ public class PurchaserCallbacks
         {
             PurchaserLogger.LogFailedConfirmation(cartItem.Product, reason);
         }
-        purchaser.m_IAPProduct.OnFail?.Invoke();
+        purchaser.m_IAPProduct?.OnFail?.Invoke();
         purchaser.m_IAPProduct = null;
         // ActivityBlockContext.Events.WaitForPurchase?.Invoke(false);
     }
@@ -110,7 +110,7 @@ public class PurchaserCallbacks
         {
             PurchaserLogger.LogFailedPurchase(cartItem.Product, reason);
         }
-        purchaser.m_IAPProduct.OnFail?.Invoke();
+        purchaser.m_IAPProduct?.OnFail?.Invoke();
         purchaser.m_IAPProduct = null;
         // ActivityBlockContext.Events.WaitForPurchase?.Invoke(false);
     }
@@ -121,7 +121,7 @@ public class PurchaserCallbacks
         {
             PurchaserLogger.LogDeferredPurchase(cartItem.Product);
         }
-        purchaser.m_IAPProduct.OnFail?.Invoke();
+        purchaser.m_IAPProduct?.OnFail?.Invoke();
         purchaser.m_IAPProduct = null;
         // ActivityBlockContext.Events.WaitForPurchase?.Invoke(false);
     }
@@ -130,14 +130,11 @@ public class PurchaserCallbacks
         string productID = product.definition.id;
         decimal num = product.metadata.localizedPrice;
         string currencyCode = product.metadata.isoCurrencyCode;
-        // if (GameManager.Instance.BuildType == BuildType.Release)
-        // {
-        //     AppsFlyerManager.TrackAppsFlyerPurchase(productID, num, currencyCode);
-        //     // AnalyticsManager.TrackIAPFakeRevenue(num, currencyCode);
-            
-        //     // Update InMobi publisher signals with IAP purchase
-        //     // ABIInMobiPublisherSignalsManager.OnIAPPurchase(num, currencyCode);
-        // }
+
+
+#if RELEASE_ONLY
+        AppsFlyerManager.TrackAppsFlyerPurchase(productID, num, currencyCode);
+#endif
         
         EventManager.TriggerEvent("BuyIAPSuccess");
         // InGameAnalyticController.EventTrackIAPConfirm?.Invoke(productID, "shop");

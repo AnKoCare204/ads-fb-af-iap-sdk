@@ -133,31 +133,36 @@ public class Purchaser : Singleton<Purchaser>
     private void InitializeIapService()
     {
         IAPService.Initialize(OnServiceInitialized,
-            (message) =>
-            {
-                PurchaserLogger.Log($"Initialization failed, IAP service dependency error: {message}");
-            });
+            (message) => { PurchaserLogger.Log($"Initialization failed, IAP service dependency error: {message}"); });
     }
 
     private void CreateCrossPlatformValidator()
     {
+        // m_CrossPlatformValidator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), Application.identifier);
 #if !UNITY_EDITOR
-            try
+        try
+        {
+            if (CanCrossPlatformValidate())
             {
-                if (CanCrossPlatformValidate())
-                {
 #if !DEBUG_STOREKIT_TEST
-                    m_CrossPlatformValidator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), Application.identifier);
+                m_CrossPlatformValidator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(),
+                    Application.identifier);
 #else
-                    m_CrossPlatformValidator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), Application.identifier);
+                    m_CrossPlatformValidator =
+ new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), Application.identifier);
 #endif
-                }
             }
-            catch (NotImplementedException exception)
-            {
-                PurchaserLogger.Log("===========");
-                PurchaserLogger.Log($"Cross Platform Validator Not Implemented: {exception}");
-            }
+        }
+        catch (NotImplementedException exception)
+        {
+            PurchaserLogger.Log("===========");
+            PurchaserLogger.Log($"Cross Platform Validator Not Implemented: {exception}");
+        }
+        catch (Exception exception)
+        {
+            PurchaserLogger.Log("===========");
+            PurchaserLogger.Log($"Cross Platform Validator Exception: {exception}");
+        }
 #endif
     }
 
@@ -173,9 +178,8 @@ public class Purchaser : Singleton<Purchaser>
         await m_StoreService.Connect();
         PurchaserLogger.Log("===========");
         PurchaserLogger.Log("Store Connected.");
-        
-        FetchInitialProducts();
 
+        FetchInitialProducts();
     }
 
     private void FetchInitialProducts()
@@ -183,6 +187,7 @@ public class Purchaser : Singleton<Purchaser>
         m_CatalogProvider.FetchProducts(m_ProductService.FetchProductsWithNoRetries,
             DefaultStoreHelper.GetDefaultStoreName());
     }
+
     public void BuyIAPProduct(IAPProduct product)
     {
         if (IsPurchaseInProgress) return;
@@ -190,6 +195,7 @@ public class Purchaser : Singleton<Purchaser>
         InitiatePurchase(product);
         // ActivityBlockContext.Events.WaitForPurchase?.Invoke(true);
     }
+
     public void InitiatePurchase(IAPProduct iapProduct)
     {
         Product product = FindProduct(iapProduct.ProductId);
@@ -291,7 +297,7 @@ public class Purchaser : Singleton<Purchaser>
 
     public void ValidatePurchaseIfPossible(IOrderInfo orderInfo)
     {
-        if (CanCrossPlatformValidate())
+        if (CanCrossPlatformValidate() && m_CrossPlatformValidator != null)
         {
             ValidatePurchase(orderInfo);
         }
@@ -307,6 +313,25 @@ public class Purchaser : Singleton<Purchaser>
     {
         try
         {
+            // Kiểm tra null để tránh NullReferenceException
+            if (m_CrossPlatformValidator == null)
+            {
+                PurchaserLogger.Log("CrossPlatformValidator is null, skipping validation.");
+                return;
+            }
+
+            if (orderInfo == null)
+            {
+                PurchaserLogger.Log("OrderInfo is null, cannot validate purchase.");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(orderInfo.Receipt))
+            {
+                PurchaserLogger.Log("Receipt is null or empty, cannot validate purchase.");
+                return;
+            }
+
             var result = m_CrossPlatformValidator.Validate(orderInfo.Receipt);
 
             if (IsGooglePlay() || IsAppleStore())
@@ -326,6 +351,10 @@ public class Purchaser : Singleton<Purchaser>
         {
             PurchaserLogger.Log("Invalid receipt, not unlocking content. " + ex);
         }
+        catch (Exception ex)
+        {
+            PurchaserLogger.Log("Error validating purchase: " + ex.Message);
+        }
     }
 
     private bool IsGooglePlay()
@@ -333,6 +362,7 @@ public class Purchaser : Singleton<Purchaser>
         return Application.platform == RuntimePlatform.Android &&
                DefaultStoreHelper.GetDefaultStoreName() == UnityEngine.Purchasing.GooglePlay.Name;
     }
+
     private bool IsAppleStore()
     {
         return (Application.platform == RuntimePlatform.IPhonePlayer ||
