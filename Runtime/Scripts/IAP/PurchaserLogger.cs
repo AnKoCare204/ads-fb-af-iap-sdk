@@ -6,8 +6,9 @@ using UnityEngine.Purchasing.Security;
 
 public static class PurchaserLogger
 {
+#if CHEAT_ONLY
     private static bool IsShowing => true;
-#if RELEASE_ONLY
+#elif RELEASE_ONLY
     private static bool IsShowing => false;
 #endif
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
