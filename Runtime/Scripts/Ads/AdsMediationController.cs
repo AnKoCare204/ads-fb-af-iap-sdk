@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -123,14 +123,13 @@ namespace SDK {
         #endregion
 
         #region Reward Ads
-        protected string m_RewardedVideoPlacement = "rewarded_video";
-        protected Action<bool> m_RewardedVideoCloseCallback;
+        protected Action m_RewardedVideoCloseCallback;
         protected Action m_RewardedVideoLoadSuccessCallback;
         protected Action m_RewardedVideoLoadFailedCallback;
         protected Action m_RewardedVideoEarnSuccessCallback;
         protected Action m_RewardedVideoShowStartCallback;
         protected Action m_RewardedVideoShowFailCallback;
-        public virtual void InitRewardVideoAd(Action<bool> videoClosed, Action videoLoadSuccess, Action videoLoadFailed, Action videoStart) {
+        public virtual void InitRewardVideoAd(Action videoClosed, Action videoLoadSuccess, Action videoLoadFailed, Action videoStart) {
             m_RewardedVideoCloseCallback = videoClosed;
             m_RewardedVideoLoadSuccessCallback = videoLoadSuccess;
             m_RewardedVideoLoadFailedCallback = videoLoadFailed;
@@ -138,8 +137,8 @@ namespace SDK {
         }
         public virtual void RequestRewardVideoAd() {
         }
-        public virtual void ShowRewardVideoAd(Action successCallback, Action failedCallback, string m_RewardedVideoPlacement = "rewarded_video") {
-            this.m_RewardedVideoPlacement = m_RewardedVideoPlacement;
+        public virtual void ShowRewardVideoAd(Action successCallback, Action failedCallback) {
+
             m_RewardedVideoEarnSuccessCallback = successCallback;
             m_RewardedVideoShowFailCallback = failedCallback;
         }
