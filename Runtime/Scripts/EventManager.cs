@@ -12,6 +12,12 @@ namespace SDK {
         private static readonly Dictionary<string, Action> EventDictionary = new();
         private static readonly Stack<Action> EventStack = new();
 
+        private void Awake()
+        {
+            transform.SetParent(null);
+            DontDestroyOnLoad(gameObject);
+        }
+
         private void Start()
         {
 #if R3_TRIGGER
