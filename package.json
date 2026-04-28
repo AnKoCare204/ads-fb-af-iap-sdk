@@ -1,6 +1,6 @@
 {
   "name": "com.antq.ads-fb-af-iap-sdk",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "displayName": "ADS FB AF IAP SDK",
   "description": "Unity SDK tích hợp quảng cáo (AdMob, MAX, IronSource), Firebase Analytics, AppsFlyer và In-App Purchase",
   "unity": "6000.0",
@@ -22,7 +22,9 @@
     "email": "antq@abigames.com.vn",
     "url": ""
   },
-  "dependencies": {},
+  "dependencies": {
+    "com.antq.event-tracking-sdk": "https://github.com/AnKoCare204/EventTracking.git"
+  },
   "samples": [
     {
       "displayName": "Base Setup",

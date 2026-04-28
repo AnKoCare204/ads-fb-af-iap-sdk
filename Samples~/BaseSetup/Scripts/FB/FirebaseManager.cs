@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Firebase;
 using Firebase.Analytics;
 using Firebase.Extensions;
@@ -35,6 +36,8 @@ namespace SDK {
                     IsReady = true;
                     FirebaseLogger.Log("Initialized");
                     // Optional: Trigger your Analytics/Remote Config init here
+                    EventTrackingManager.TrackEventFirebase += LogFirebaseEvent;
+                    UserPropertyManager.SetUserPropertyFirebase += SetUserProperty;
                     FirebaseAnalyticsManager.Initialize();
                     FirebaseRemoteConfigManager.Initialize();
                 }
@@ -44,6 +47,7 @@ namespace SDK {
                 }
             });
         }
+
 
         public void LogFirebaseEvent(string eventName, string eventParameter, double eventValue) {
             if (IsReady) {
@@ -59,6 +63,45 @@ namespace SDK {
             if (IsReady) {
                 FirebaseAnalyticsManager.LogEvent(eventName);
             }
+        }
+        public void LogFirebaseEvent(string eventName, params AnalyticsParameter[] parameters) {
+            if (!IsReady) {
+                return;
+            }
+
+            if (parameters == null || parameters.Length == 0) {
+                FirebaseAnalyticsManager.LogEvent(eventName);
+                return;
+            }
+
+            var firebaseParameters = new List<Parameter>(parameters.Length);
+            foreach (var parameter in parameters) {
+                if (parameter == null || string.IsNullOrEmpty(parameter.Name)) {
+                    continue;
+                }
+
+                switch (parameter.ValueType) {
+                    case 0:
+                        firebaseParameters.Add(new Parameter(parameter.Name, parameter.StringValue ?? string.Empty));
+                        break;
+                    case 1:
+                        firebaseParameters.Add(new Parameter(parameter.Name, parameter.LongValue));
+                        break;
+                    case 2:
+                        firebaseParameters.Add(new Parameter(parameter.Name, parameter.DoubleValue));
+                        break;
+                    default:
+                        firebaseParameters.Add(new Parameter(parameter.Name, parameter.StringValue ?? string.Empty));
+                        break;
+                }
+            }
+
+            if (firebaseParameters.Count == 0) {
+                FirebaseAnalyticsManager.LogEvent(eventName);
+                return;
+            }
+
+            FirebaseAnalyticsManager.LogEvent(eventName, firebaseParameters.ToArray());
         }
         public void SetUserProperty(string propertyName, string property) {
             if (IsReady) {
