@@ -98,7 +98,7 @@ public class AdsController : Singleton<AdsController>
                     InterCooldown += InterCappingAfterReward;
                     InterCooldown = Mathf.Clamp(InterCooldown, 0, InterCapping);
                 },
-                (bool close) =>
+                () =>
                 {
                     closeAction?.Invoke();
                 },

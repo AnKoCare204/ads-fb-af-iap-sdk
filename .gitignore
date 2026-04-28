@@ -81,3 +81,4 @@ Thumbs.db
 # Package Manager
 Packages/packages-lock.json
 
+*.meta

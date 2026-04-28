@@ -44,11 +44,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1513433159871150065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02046a2b833dc384abeb49e3663c7ba0, type: 3}
+  m_Script: {fileID: 11500000, guid: a886538cefcb644e2bf73279de31c08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsCheatAds: 0
-  m_SDKSetup: {fileID: 11400000, guid: 44308bf01765e1a48ae509c432e251e4, type: 2}
+  m_SDKSetup: {fileID: 11400000, guid: ce8b9a5888ad249efaf4494e1bce6149, type: 2}
   m_AdsLoadingCooldown: 0
   m_MaxLoadingCooldown: 5
   m_InterstitialCappingAdsCooldown: 0
@@ -65,46 +65,13 @@ MonoBehaviour:
   IsLinkRewardWithRemoveAds: 0
   resumeAdsType: 0
   m_MainAdsMediationType: 1
-  m_AdsConfigs:
-  - adsType: 2
-    adsMediationType: 1
-    isActive: 1
-    maxReloadTime: 3
-    adsMediations: []
-  - adsType: 1
-    adsMediationType: 1
-    isActive: 1
-    maxReloadTime: 3
-    adsMediations: []
-  - adsType: 0
-    adsMediationType: 1
-    isActive: 1
-    maxReloadTime: 3
-    adsMediations: []
-  - adsType: 4
-    adsMediationType: 0
-    isActive: 1
-    maxReloadTime: 3
-    adsMediations: []
-  - adsType: 3
-    adsMediationType: 0
-    isActive: 1
-    maxReloadTime: 3
-    adsMediations: []
-  - adsType: 5
-    adsMediationType: 0
-    isActive: 1
-    maxReloadTime: 3
-    adsMediations: []
-  m_AdsMediationControllers:
-  - {fileID: 1664383872516899532}
-  - {fileID: 361701755393429063}
-  - {fileID: 2106119536948214026}
+  m_AdsConfigs: []
+  m_AdsMediationControllers: []
   IsAutoRefreshCollapsibleBanner: 0
   IsAutoRefreshExtendCollapsibleBanner: 0
-  m_AutoRefreshTimeCollapsibleBanner: 30
+  m_AutoRefreshTimeCollapsibleBanner: 0
   IsAutoCloseCollapsibleBanner: 0
-  m_AutoCloseTimeCollapsibleBanner: 30
+  m_AutoCloseTimeCollapsibleBanner: 20
   IsActiveResumeAdsIngame: 0
 --- !u!1 &5570945614407336880
 GameObject:
@@ -147,29 +114,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5570945614407336880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faa6ee2423b1e2b4ca9dd7f1e9205027, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b0ebd82eef694a01ad9af5bfcbdb808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsActive: 0
   IsInited: 0
-  m_AdmobAdSetup:
-    interstitialAdUnitID:
-      AndroidID: []
-    rewardedAdUnitID:
-      AndroidID: []
-    bannerAdUnitID:
-      AndroidID: []
-    collapsibleBannerAdUnitID:
-      AndroidID: []
-    mrecAdUnitID:
-      AndroidID: []
-    appOpenAdUnitID:
-      AndroidID: []
-  m_BannerPosition: 1
-  IsBannerShowingOnStart: 0
-  m_CollapsibleBannerPosition: 1
-  IsCollapsibleBannerShowingOnStart: 0
-  m_MRECPosition: 1
 --- !u!1 &6062662992607247268
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,31 +160,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6062662992607247268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4d279ebb97674449a785d32e0eee1db, type: 3}
+  m_Script: {fileID: 11500000, guid: a356ed2d9dea14029b2f490f23e1611d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsActive: 0
   IsInited: 0
-  m_MaxAdConfig:
-    sdkKey:
-      AndroidID: ZoNyqu_piUmpl33-qkoIfRp6MTZGW9M5xk1mb1ZIWK6FN9EBu0TXSHeprC3LMPQI7S3kTc1-x7DJGSV8S-gvFJ
-    interstitialAdUnitID:
-      AndroidID: b5c7c186839b11c3
-    rewardedAdUnitID:
-      AndroidID: 601c2ffbd20c5553
-    bannerAdUnitID:
-      AndroidID: 22281f5a8a803c7c
-    collapsibleBannerAdUnitID:
-      AndroidID: 
-    mrecAdUnitID:
-      AndroidID: 
-    appOpenAdUnitID:
-      AndroidID: 
-    isResetCounter: 1
-    rewardLoaded: 0
-    rewardAdsUnit: []
-    interstitialAdsUnit: []
-  m_BannerPosition: 7
 --- !u!1 &8919516335317368231
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4856074513662410327}
-  - component: {fileID: 2106119536948214026}
+  - component: {fileID: 8709497315944854719}
   m_Layer: 0
   m_Name: IronsourceMediationController
   m_TagString: Untagged
@@ -268,7 +197,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3350496071912491279}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2106119536948214026
+--- !u!114 &8709497315944854719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -277,7 +206,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8919516335317368231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4fadf3c769db13489da11e16425d5dc, type: 3}
+  m_Script: {fileID: 11500000, guid: a50681de460c24812b839b3a9d256b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_IsActive: 0

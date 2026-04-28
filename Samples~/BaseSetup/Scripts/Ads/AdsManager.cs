@@ -938,7 +938,7 @@ namespace SDK
 
         private AdsConfig RewardVideoAdsConfig => GetAdsConfig(AdsType.REWARDED);
 
-        private Action<bool> m_RewardedVideoCloseCallback;
+        private Action m_RewardedVideoCloseCallback;
         private Action m_RewardedVideoLoadSuccessCallback;
         private Action m_RewardedVideoLoadFailedCallback;
         private Action m_RewardedVideoEarnSuccessCallback;
@@ -976,7 +976,7 @@ namespace SDK
         }
 
         public void ShowRewardVideo(string rewardedPlacement, Action successCallback,
-            Action<bool> closedCallback = null, Action failedCallback = null)
+            Action closedCallback = null, Action failedCallback = null)
         {
             if (IsCheatAds)
             {
@@ -1008,7 +1008,7 @@ namespace SDK
                 {
                     MarkShowingAds(true);
                     GetSelectedMediation(AdsType.REWARDED)
-                        .ShowRewardVideoAd(OnRewardVideoEarnSuccess, OnRewardVideoShowFail, rewardedPlacement);
+                        .ShowRewardVideoAd(OnRewardVideoEarnSuccess, OnRewardVideoShowFail);
                 }
             }
         }
@@ -1038,10 +1038,10 @@ namespace SDK
             // AnalyticsManager.TrackAdsReward_ShowFail();
         }
 
-        private void OnRewardVideoClosed(bool isWatchedSuccess)
+        private void OnRewardVideoClosed()
         {
             ResetAdsInterstitialCappingTime();
-            m_RewardedVideoCloseCallback?.Invoke(isWatchedSuccess);
+            m_RewardedVideoCloseCallback?.Invoke();
             MarkShowingAds(false);
         }
 
